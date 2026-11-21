@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vision_28   Work Done By</string>
+    <string name="work"></string>
+    <string name="day">Day </string>
+    <string name="bt_task">✓</string>
+    <string name="bt_text">Get All Work </string>
+    <string name="hint">Enter Today Work </string>
+    <string name="second_activity">Second Activity</string>
+</resources>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tx"
+            android:textColor="#f3f7f8"
+            android:text="@string/work"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tx_d"
+            android:textColor="#fdfcbf"
+            android:text="@string/day"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:background="@drawable/rounded_corner"
+            android:textSize="12sp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bt"
+            android:textColor="#fdfcbf"
+            android:text="@string/bt_text"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="420dp"
+        android:layout_height="50dp"
+        android:padding="4dp"
+        android:gravity="center_vertical"
+        android:background="@color/add_task_bg"
+        android:layout_alignParentBottom="true"
+        >   
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/bt_add"
+            android:textColor="#ffffff"
+            android:text="@string/bt_task"
+            android:textStyle="bold"
+            android:minWidth="32dp"
+            android:minHeight="24dp"
+            android:gravity="center"
+            android:paddingRight="2dp"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:layout_alignParentRight="true"
+            android:textSize="24sp"
+            android:layout_marginRight="4dp"/>
+            
+         <EditText
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:id="@+id/et"
+            android:textColor="#ffffff"
+            android:layout_marginRight="4dp"
+            android:paddingRight="4dp"
+            android:background="@android:color/transparent"
+            android:hint="@string/hint"
+            android:text="@string/work"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/bt"
+            android:textSize="14sp" />
+        </RelativeLayout>
+</RelativeLayout>

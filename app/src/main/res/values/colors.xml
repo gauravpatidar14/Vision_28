@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#33bbdd</color>
+    <color name="on_primary">#FFFFFFFF</color>
+    <color name="ic_launcher_background">#3DDC84</color>
+    <color name="add_task_bg">#eDac9d</color>
+    <color name="add_task_bt">#aadd00</color>
+    <color name="color1">#33bbdd</color>
+</resources>
