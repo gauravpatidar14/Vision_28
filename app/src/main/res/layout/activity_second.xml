@@ -5,8 +5,16 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/second_activity" 
+        android:layout_height="wrap_content"
+        android:text="@string/second_activity"
         android:textColor="@color/color1"
-        android:textStyle="bold"/>
+        android:layout_alignParentTop="true"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iv"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/logo" />
 </RelativeLayout>

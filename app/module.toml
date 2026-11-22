@@ -43,6 +43,9 @@ scope = "TEST_IMPLEMENTATION"
 java = ["src/test/java", "src/test/kotlin"]
 resources = ["src/test/resources"]
 
+[dependencies]
+implementation = ["androidx.core:core-ktx:1.18.0"]
+
 [android]
 namespace = "com.example.vision28"
 compileSdk = 36
