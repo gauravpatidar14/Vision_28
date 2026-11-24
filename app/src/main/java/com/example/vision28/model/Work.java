@@ -22,6 +22,12 @@ public class Work {
     }
 
     public String getTime() {
+        return this.time.substring(this.time.indexOf(":")-2);
+    }
+    public String getDate(){
+       return this.time.substring(0,this.time.indexOf(":")-3);
+    }
+    public String getTimeStamp(){
         return this.time;
     }
 }

@@ -74,11 +74,8 @@ public class MainActivity extends Activity {
     while (mat.find() && mat2.find()) {
       String matchedText = mat.group();
       String matchedText2 = mat2.group();
-      String spl = matchedText.substring(matchedText.length() - 8, matchedText.length());
-      list.add(new Work(matchedText2, spl));
-
+       list.add(new Work(matchedText2,matchedText));
     }
-
   }
 
   public void saveListToStorage() {
