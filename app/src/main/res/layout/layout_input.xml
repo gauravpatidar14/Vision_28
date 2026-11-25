@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="420dp"
-    android:layout_height="50dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:padding="4dp"
+    android:background="@color/ic_launcher_background"
     android:gravity="center_vertical"
-    android:background="@color/add_task_bg"
     android:layout_alignParentBottom="true">
 
     <Button
@@ -32,6 +32,8 @@
         android:textColor="#ffffff"
         android:layout_marginRight="4dp"
         android:paddingRight="4dp"
+        android:paddingLeft="4dp"
+        android:textColorHint="#bd9c3d"
         android:background="@android:color/transparent"
         android:hint="@string/hint"
         android:text="@string/work"

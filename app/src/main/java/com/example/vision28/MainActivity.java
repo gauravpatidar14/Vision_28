@@ -1,11 +1,18 @@
 package com.example.vision28;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,6 +39,7 @@ public class MainActivity extends Activity {
   Button btAdd;
   int d = 1;
   EditText et;
+  RelativeLayout rel;
   public String ts;
   TextView tx;
   TextView tx_d;
@@ -50,6 +58,7 @@ public class MainActivity extends Activity {
     setContentView(R.layout.activity_main);
 
     rec = findViewById(R.id.rec);
+    rel = findViewById(R.id.rel);
     rec.setLayoutManager(new LinearLayoutManager(this));
 
     if (list == null) {
@@ -61,11 +70,44 @@ public class MainActivity extends Activity {
 
   }
 
-  /*
-   * public void addWork() { System.currentTimeMillis(); DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd,yyyy hh:mm a"); String formattedTimestamp = LocalDateTime.now().format(formatter); this.ts = formattedTimestamp; this.ws = "No Work Yet"; if (this.et.getText() != null && this.et.getText().toString() != null && this.et.getText().toString().trim().length() > 0) { this.ws = this.et.getText().toString().trim(); } this.w = new Work(this.ws, this.ts); this.tx.append("\n" + this.w.getTime() + "\n" + this.w.getName() + "\n"); this.tx_d.append("#d" + this.d); if (list != null) { list.add(this.w); saveListToStorage(); } }
-   */
+  public void addWork(String wName) {
+    System.currentTimeMillis();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd,yyyy hh:mm a");
+    String formattedTimestamp = LocalDateTime.now().format(formatter);
+    this.ts = formattedTimestamp;
+    this.ws = "No Work Yet";
+    if (wName != null && wName.trim().length() > 0) {
+      this.w = new Work(wName, this.ts);
+
+      if (list != null) {
+        list.add(this.w);
+        adp.notifyItemInserted(list.size()-1);
+        saveListToStorage();
+      }
+    }
+
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    super.onCreateOptionsMenu(menu);
+    getMenuInflater().inflate(R.menu.menu_main, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    super.onOptionsItemSelected(item);
+    if (item.getItemId() == R.id.action_add) {
+      Toast.makeText(this, "Menu Clicked", Toast.LENGTH_SHORT).show();
+      openAddWorkDialog();
+    }
+    return true;
+  }
 
   public void getAllWork() {
+    if(list!=null)
+      list.clear();
     String s1 = readListFromStorage();
     // String s0 = getSummery(s1);
     Matcher mat = PATTERN.matcher(s1);
@@ -74,8 +116,38 @@ public class MainActivity extends Activity {
     while (mat.find() && mat2.find()) {
       String matchedText = mat.group();
       String matchedText2 = mat2.group();
-       list.add(new Work(matchedText2,matchedText));
+      list.add(new Work(matchedText2, matchedText));
     }
+  }
+
+  public void openAddWorkDialog() {
+
+    LayoutInflater inflater = getLayoutInflater();
+    View dialogView = inflater.inflate(R.layout.layout_input, null);
+
+    EditText etInput = dialogView.findViewById(R.id.et);
+    Button btnSubmit = dialogView.findViewById(R.id.bt_add);
+
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setView(dialogView);
+
+    AlertDialog dialog = builder.create();
+
+    DisplayMetrics metrics = getResources().getDisplayMetrics();
+    int halfHeight = metrics.heightPixels / 4;
+    btnSubmit.setOnClickListener(v -> {
+      String userText = etInput.getText().toString().trim();
+      if (userText != null && userText.trim().length() > 0)
+      {  Toast.makeText(getBaseContext(), userText, Toast.LENGTH_SHORT).show();
+      addWork(userText);
+      }  else
+        Toast.makeText(getBaseContext(), "Enter Work Details", Toast.LENGTH_SHORT).show();
+
+      dialog.dismiss();
+    });
+
+    dialog.show();
+    dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, halfHeight);
   }
 
   public void saveListToStorage() {
@@ -84,8 +156,8 @@ public class MainActivity extends Activity {
       try {
         file.createNewFile();
         BufferedWriter br = new BufferedWriter(new FileWriter(file, true));
-        br.append((CharSequence) (String.valueOf(list.get(0).getTime()) + "\n"
-            + list.get(0).getName() + "\n"));
+        br.append((CharSequence) (String.valueOf(list.get(0).getTimeStamp() + "\n"
+            + list.get(0).getName() + "\n")));
         br.flush();
         br.close();
         Toast.makeText(getBaseContext(), "File Saved", 0).show();
@@ -100,7 +172,7 @@ public class MainActivity extends Activity {
       if (list.size() > 0) {
         int j = list.size() - 1;
         BufferedWriter br2 = new BufferedWriter(new FileWriter(file, true));
-        br2.append((CharSequence) (String.valueOf(list.get(j).getTime()) + "\n"
+        br2.append((CharSequence) (String.valueOf(list.get(j).getTimeStamp()) + "\n"
             + list.get(j).getName() + "\n"));
         br2.flush();
         br2.close();
